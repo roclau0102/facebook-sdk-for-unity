@@ -33,7 +33,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.test.ActivityTestCase;
 import android.util.Log;
 import android.util.Base64;
 import android.content.pm.*;
@@ -211,6 +210,9 @@ public class FB {
 
     @UnityCallable
     public static String GetUserID() {
+        if (!FacebookSdk.isInitialized()) {
+            return null;
+        }
         return AppEventsLogger.getUserID();
     }
 
