@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -18,13 +18,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-
-[assembly: AssemblyVersion("7.19.2")]
-[assembly: InternalsVisibleTo("Assembly-CSharp")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Android")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Canvas")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Gameroom")]
-[assembly: InternalsVisibleTo("Facebook.Unity.IOS")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Tests")]
+namespace Facebook.Unity
+{
+    /// <summary>
+    /// The result of a Media Upload
+    /// </summary>
+    public interface IMediaUploadResult : IResult
+    {
+        /// <summary>
+        /// Gets the Media Identifier.
+        /// </summary>
+        /// <value>The media identifier if the upload was successful.</value>
+        string MediaId { get; }
+    }
+}

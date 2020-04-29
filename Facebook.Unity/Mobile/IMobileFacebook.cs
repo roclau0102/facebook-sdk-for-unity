@@ -20,6 +20,7 @@
 
 namespace Facebook.Unity.Mobile
 {
+    using System;
     using System.Collections.Generic;
 
     internal interface IMobileFacebook : IFacebook
@@ -43,5 +44,18 @@ namespace Facebook.Unity.Mobile
         void SetAutoLogAppEventsEnabled(bool autoLogAppEventsEnabled);
 
         void SetAdvertiserIDCollectionEnabled(bool advertiserIDCollectionEnabled);
+
+        void OpenFriendFinderDialog(FacebookDelegate<IGamingServicesFriendFinderResult> callback);
+
+        void UploadImageToMediaLibrary(
+            string caption,
+            Uri imageUri,
+            bool shouldLaunchMediaDialog,
+            FacebookDelegate<IMediaUploadResult> callback);
+
+        void UploadVideoToMediaLibrary(
+            string caption,
+            Uri videoUri,
+            FacebookDelegate<IMediaUploadResult> callback);
     }
 }

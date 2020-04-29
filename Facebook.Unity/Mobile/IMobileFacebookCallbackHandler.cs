@@ -25,5 +25,11 @@ namespace Facebook.Unity.Mobile
         void OnFetchDeferredAppLinkComplete(string message);
 
         void OnRefreshCurrentAccessTokenComplete(string message);
+
+        void OnFriendFinderComplete(string message);
+
+        void OnUploadImageToMediaLibraryComplete(string message);
+
+        void OnUploadVideoToMediaLibraryComplete(string message);
     }
 }

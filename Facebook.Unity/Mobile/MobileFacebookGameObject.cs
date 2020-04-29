@@ -39,5 +39,20 @@ namespace Facebook.Unity.Mobile
         {
             this.MobileFacebook.OnRefreshCurrentAccessTokenComplete(new ResultContainer(message));
         }
+
+        public void OnFriendFinderComplete(string message)
+        {
+            this.MobileFacebook.OnFriendFinderComplete(new ResultContainer(message));
+        }
+
+        public void OnUploadImageToMediaLibraryComplete(string message)
+        {
+            this.MobileFacebook.OnUploadImageToMediaLibraryComplete(new ResultContainer(message));
+        }
+
+        public void OnUploadVideoToMediaLibraryComplete(string message)
+        {
+            this.MobileFacebook.OnUploadVideoToMediaLibraryComplete(new ResultContainer(message));
+        }
     }
 }

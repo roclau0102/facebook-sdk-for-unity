@@ -288,6 +288,12 @@ namespace Facebook.Unity.Mobile.IOS
             this.iosWrapper.GetAppLink(System.Convert.ToInt32(CallbackManager.AddFacebookDelegate(callback)));
         }
 
+        public override void OpenFriendFinderDialog(
+            FacebookDelegate<IGamingServicesFriendFinderResult> callback)
+		{
+            this.iosWrapper.OpenFriendFinderDialog(System.Convert.ToInt32(CallbackManager.AddFacebookDelegate(callback)));
+		}
+
         public override void RefreshCurrentAccessToken(
             FacebookDelegate<IAccessTokenRefreshResult> callback)
         {
@@ -298,6 +304,30 @@ namespace Facebook.Unity.Mobile.IOS
         protected override void SetShareDialogMode(ShareDialogMode mode)
         {
             this.iosWrapper.SetShareDialogMode((int)mode);
+        }
+
+        public override void UploadImageToMediaLibrary(
+            string caption,
+            Uri imageUri,
+            bool shouldLaunchMediaDialog,
+            FacebookDelegate<IMediaUploadResult> callback)
+        {
+            this.iosWrapper.UploadImageToMediaLibrary(
+                System.Convert.ToInt32(CallbackManager.AddFacebookDelegate(callback)),
+                caption,
+                imageUri.AbsolutePath.ToString(),
+                shouldLaunchMediaDialog);
+        }
+
+        public override void UploadVideoToMediaLibrary(
+            string caption,
+            Uri videoUri,
+            FacebookDelegate<IMediaUploadResult> callback)
+        {
+            this.iosWrapper.UploadVideoToMediaLibrary(
+                System.Convert.ToInt32(CallbackManager.AddFacebookDelegate(callback)),
+                caption,
+                videoUri.AbsolutePath.ToString());
         }
 
         private static IIOSWrapper GetIOSWrapper()

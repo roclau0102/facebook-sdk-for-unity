@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -18,13 +18,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
+namespace Facebook.Unity
+{
+    using System.Collections.Generic;
+    internal class MediaUploadResult : ResultBase, IMediaUploadResult
+    {
+        internal MediaUploadResult(ResultContainer resultContainer) : base(resultContainer)
+        {
+            if (this.ResultDictionary != null)
+            {
+                string mediaId;
+                if (this.ResultDictionary.TryGetValue("video_id", out mediaId))
+                {
+                    this.MediaId = mediaId;
+                }
+                else if (this.ResultDictionary.TryGetValue("id", out mediaId))
+                {
+                    this.MediaId = mediaId;
+                }
+            }
+        }
 
-[assembly: AssemblyVersion("7.19.2")]
-[assembly: InternalsVisibleTo("Assembly-CSharp")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Android")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Canvas")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Gameroom")]
-[assembly: InternalsVisibleTo("Facebook.Unity.IOS")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Tests")]
+        public string MediaId { get; private set; }
+
+        public override string ToString()
+        {
+            return Utilities.FormatToString(
+                base.ToString(),
+                this.GetType().Name,
+                new Dictionary<string, string>()
+                {
+                    { "MediaId", this.MediaId },
+                });
+        }
+    }
+}

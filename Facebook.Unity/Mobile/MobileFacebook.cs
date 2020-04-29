@@ -112,6 +112,46 @@ namespace Facebook.Unity.Mobile
             CallbackManager.OnFacebookResponse(result);
         }
 
+        public virtual void OpenFriendFinderDialog(FacebookDelegate<IGamingServicesFriendFinderResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnFriendFinderComplete(ResultContainer resultContainer)
+        {
+            var result = new GamingServicesFriendFinderResult(resultContainer);
+            CallbackManager.OnFacebookResponse(result);
+        }
+
+        public void OnUploadImageToMediaLibraryComplete(ResultContainer resultContainer)
+        {
+            var result = new MediaUploadResult(resultContainer);
+            CallbackManager.OnFacebookResponse(result);
+        }
+
+        public void OnUploadVideoToMediaLibraryComplete(ResultContainer resultContainer)
+        {
+            var result = new MediaUploadResult(resultContainer);
+            CallbackManager.OnFacebookResponse(result);
+        }
+
+        public virtual void UploadImageToMediaLibrary(
+            string caption,
+            Uri imageUri,
+            bool shouldLaunchMediaDialog,
+            FacebookDelegate<IMediaUploadResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void UploadVideoToMediaLibrary(
+            string caption,
+            Uri videoUri,
+            FacebookDelegate<IMediaUploadResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
         protected abstract void SetShareDialogMode(ShareDialogMode mode);
 
         private static IDictionary<string, object> DeserializeMessage(string message)

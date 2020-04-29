@@ -322,6 +322,54 @@ namespace Facebook.Unity.Mobile.Android
             refreshCurrentAccessToken.Call();
         }
 
+        public override void OpenFriendFinderDialog(
+            FacebookDelegate<IGamingServicesFriendFinderResult> callback)
+        {
+            var openFriendFinderDialog = new JavaMethodCall<IGamingServicesFriendFinderResult>(
+                this,
+                "OpenFriendFinderDialog")
+            {
+                Callback = callback
+            };
+            openFriendFinderDialog.Call();
+        }
+
+        public override void UploadImageToMediaLibrary(
+            string caption,
+            Uri imageUri,
+            bool shouldLaunchMediaDialog,
+            FacebookDelegate<IMediaUploadResult> callback)
+        {
+            MethodArguments args = new MethodArguments();
+            args.AddString("caption", caption);
+            args.AddUri("imageUri", imageUri);
+            args.AddString("shouldLaunchMediaDialog", shouldLaunchMediaDialog.ToString());
+            var uploadImageToMediaLibrary = new JavaMethodCall<IMediaUploadResult>(
+                this,
+                "UploadImageToMediaLibrary")
+            {
+                Callback = callback
+            };
+            uploadImageToMediaLibrary.Call(args);
+        }
+
+        public override void UploadVideoToMediaLibrary(
+            string caption,
+            Uri videoUri,
+            FacebookDelegate<IMediaUploadResult> callback)
+        {
+            MethodArguments args = new MethodArguments();
+            args.AddString("caption", caption);
+            args.AddUri("videoUri", videoUri);
+            var uploadImageToMediaLibrary = new JavaMethodCall<IMediaUploadResult>(
+                this,
+                "UploadVideoToMediaLibrary")
+            {
+                Callback = callback
+            };
+            uploadImageToMediaLibrary.Call(args);
+        }
+
         protected override void SetShareDialogMode(ShareDialogMode mode)
         {
             this.CallFB("SetShareDialogMode", mode.ToString());

@@ -18,13 +18,16 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
+namespace Facebook.Unity
+{
+    using System.Collections.Generic;
 
-[assembly: AssemblyVersion("7.19.2")]
-[assembly: InternalsVisibleTo("Assembly-CSharp")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Android")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Canvas")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Gameroom")]
-[assembly: InternalsVisibleTo("Facebook.Unity.IOS")]
-[assembly: InternalsVisibleTo("Facebook.Unity.Tests")]
+    internal class GamingServicesFriendFinderResult : ResultBase, IGamingServicesFriendFinderResult
+    {
+    
+        internal GamingServicesFriendFinderResult(ResultContainer resultContainer) : base(resultContainer)
+        {
+           
+        }
+    }
+}

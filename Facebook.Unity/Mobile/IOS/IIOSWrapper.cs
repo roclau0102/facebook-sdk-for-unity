@@ -108,10 +108,23 @@ namespace Facebook.Unity.Mobile.IOS
 
         string FBGetUserID();
 
+        void OpenFriendFinderDialog(int requestId);
+
         void UpdateUserProperties(
             int numParams,
             string[] paramKeys,
             string[] paramVals);
+
+        void UploadImageToMediaLibrary(
+            int requestId,
+            string caption,
+            string mediaUri,
+            bool shouldLaunchMediaDialog);
+
+        void UploadVideoToMediaLibrary(
+            int requestId,
+            string caption,
+            string videoUri);
 
         void FetchDeferredAppLink(int requestId);
     }
