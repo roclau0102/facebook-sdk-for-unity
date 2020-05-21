@@ -25,6 +25,7 @@ namespace Facebook.Unity.Editor
     using Facebook.Unity.Canvas;
     using Facebook.Unity.Editor.Dialogs;
     using Facebook.Unity.Mobile;
+    using UnityEngine;
 
     internal class EditorFacebook : FacebookBase, IMobileFacebookImplementation, ICanvasFacebookImplementation
     {
@@ -134,6 +135,32 @@ namespace Facebook.Unity.Editor
             this.editorWrapper.ShowMockShareDialog(
                 this.OnShareLinkComplete,
                 "ShareLink",
+                this.CallbackManager.AddFacebookDelegate(callback));
+        }
+
+        public override void SharePhoto(
+            Texture2D texture2D,
+            Uri photoURL,
+            bool userGenerated,
+            string caption,
+            FacebookDelegate<IShareResult> callback)
+        {
+            this.editorWrapper.ShowMockShareDialog(
+                this.OnShareLinkComplete,
+                "SharePhoto",
+                this.CallbackManager.AddFacebookDelegate(callback));
+        }
+
+        public override void ShareVideo(
+            string contentTitle,
+            string contentDescription,
+            Uri preiviewPhotoURL,
+            Uri videoURL,
+            FacebookDelegate<IShareResult> callback)
+        {
+            this.editorWrapper.ShowMockShareDialog(
+                this.OnShareLinkComplete,
+                "ShareVideo",
                 this.CallbackManager.AddFacebookDelegate(callback));
         }
 

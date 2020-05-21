@@ -95,6 +95,16 @@ namespace Facebook.Unity.Tests.Mobile.Android
                 callback = this.Facebook.OnShareLinkComplete;
                 result = MockResults.GetGenericResult(callbackID, this.ResultExtras);
             }
+            else if (methodName == "SharePhoto")
+            {
+                callback = this.Facebook.OnShareLinkComplete;
+                result = MockResults.GetGenericResult(callbackID, this.ResultExtras);
+            }
+            else if (methodName == "ShareVideo")
+            {
+                callback = this.Facebook.OnShareLinkComplete;
+                result = MockResults.GetGenericResult(callbackID, this.ResultExtras);
+            }
             else if (methodName == "LoginWithPublishPermissions" || methodName == "LoginWithReadPermissions")
             {
                 callback = this.Facebook.OnLoginComplete;

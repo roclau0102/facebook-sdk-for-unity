@@ -23,6 +23,7 @@ namespace Facebook.Unity.Gameroom
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using UnityEngine;
 
     internal sealed class GameroomFacebook : FacebookBase,
     IGameroomFacebookImplementation
@@ -200,6 +201,26 @@ namespace Facebook.Unity.Gameroom
                 photoURL,
                 null,
                 callback);
+        }
+
+        public override void SharePhoto(
+            Texture2D texture2D,
+            Uri photoURL,
+            bool userGenerated,
+            string caption,
+            FacebookDelegate<IShareResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ShareVideo(
+            string contentTitle,
+            string contentDescription,
+            Uri preiviewPhotoURL,
+            Uri videoURL,
+            FacebookDelegate<IShareResult> callback)
+        {
+            throw new NotImplementedException();
         }
 
         public void Pay(

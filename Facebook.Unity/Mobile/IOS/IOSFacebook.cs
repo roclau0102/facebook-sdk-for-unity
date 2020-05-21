@@ -24,6 +24,7 @@ namespace Facebook.Unity.Mobile.IOS
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using UnityEngine;
 
     internal class IOSFacebook : MobileFacebook
     {
@@ -217,6 +218,37 @@ namespace Facebook.Unity.Mobile.IOS
                 contentTitle,
                 contentDescription,
                 photoURL.AbsoluteUrlOrEmptyString());
+        }
+
+        public override void SharePhoto(
+            Texture2D texture2D,
+            Uri photoURL,
+            bool userGenerated,
+            string caption,
+            FacebookDelegate<IShareResult> callback)
+        {
+            var tempPhotoPath = texture2D != null ? Utilities.SaveTexture2DtoPNG(texture2D, "tempSharePhoto") : photoURL.AbsoluteUrlOrEmptyString();
+            this.iosWrapper.SharePhoto(
+                this.AddCallback(callback),
+                "",
+                tempPhotoPath,
+                userGenerated,
+                caption);
+        }
+
+        public override void ShareVideo(
+            string contentTitle,
+            string contentDescription,
+            Uri previewPhotoURL,
+            Uri videoURL,
+            FacebookDelegate<IShareResult> callback)
+        {
+            this.iosWrapper.ShareVideo(
+                this.AddCallback(callback),
+                contentTitle,
+                contentDescription,
+                previewPhotoURL.AbsoluteUrlOrEmptyString(),
+                videoURL.AbsoluteUrlOrEmptyString());
         }
 
         public override void FeedShare(

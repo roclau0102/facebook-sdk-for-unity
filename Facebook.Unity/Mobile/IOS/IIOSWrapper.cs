@@ -51,6 +51,20 @@ namespace Facebook.Unity.Mobile.IOS
             string contentDescription,
             string photoURL);
 
+        void SharePhoto(
+            int requestId,
+            string texture,
+            string photoURL,
+            bool userGenerated,
+            string caption);
+
+        void ShareVideo(
+            int requestId,
+            string contentTitle,
+            string contentDescription,
+            string previewPhotoURL,
+            string videoURL);
+
         void FeedShare(
             int requestId,
             string toId,

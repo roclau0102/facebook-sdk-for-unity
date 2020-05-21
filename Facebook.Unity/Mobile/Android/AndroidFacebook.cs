@@ -231,6 +231,47 @@ namespace Facebook.Unity.Mobile.Android
             shareLinkCall.Call(args);
         }
 
+        public override void SharePhoto(
+            Texture2D texture2D,
+            Uri photoURL,
+            bool userGenerated,
+            string caption,
+            FacebookDelegate<IShareResult> callback)
+        {
+            MethodArguments args = new MethodArguments();
+            if (texture2D != null)
+            {
+                var tempPhotoPath = Utilities.SaveTexture2DtoPNG(texture2D, "tempSharePhoto");
+                args.AddUri("photo_url", new Uri(tempPhotoPath));
+            }
+            else if (photoURL != null)
+            {
+                args.AddUri("photo_url", photoURL);
+            }
+            args.AddPrimative("user_generated", userGenerated);
+            args.AddString("caption", caption);
+            var sharePhotoCall = new JavaMethodCall<IShareResult>(this, "SharePhoto");
+            sharePhotoCall.Callback = callback;
+            sharePhotoCall.Call(args);
+        }
+
+        public override void ShareVideo(
+            string contentTitle,
+            string contentDescription,
+            Uri preiviewPhotoURL,
+            Uri videoURL,
+            FacebookDelegate<IShareResult> callback)
+        {
+            MethodArguments args = new MethodArguments();
+            args.AddString("content_title", contentTitle);
+            args.AddString("content_description", contentDescription);
+            args.AddUri("preview_photo_url", preiviewPhotoURL);
+            args.AddUri("video_url", videoURL);
+            var shareVideoCall = new JavaMethodCall<IShareResult>(this, "ShareVideo");
+            shareVideoCall.Callback = callback;
+            shareVideoCall.Call(args);
+        }
+
         public override void FeedShare(
             string toId,
             Uri link,

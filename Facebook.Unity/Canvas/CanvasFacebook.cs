@@ -26,6 +26,7 @@ namespace Facebook.Unity.Canvas
     using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using UnityEngine;
 
     internal sealed class CanvasFacebook : FacebookBase, ICanvasFacebookImplementation
     {
@@ -228,6 +229,16 @@ namespace Facebook.Unity.Canvas
             var call = new CanvasUIMethodCall<IShareResult>(this, MethodFeed, Constants.OnShareCompleteMethodName);
             call.Callback = callback;
             call.Call(args);
+        }
+
+        public override void SharePhoto(Texture2D texture2D, Uri photoURL, bool userGenerated, string caption, FacebookDelegate<IShareResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ShareVideo(string contentTitle, string contentDescription, Uri preiviewPhotoURL, Uri videoURL, FacebookDelegate<IShareResult> callback)
+        {
+            throw new NotImplementedException();
         }
 
         public override void FeedShare(

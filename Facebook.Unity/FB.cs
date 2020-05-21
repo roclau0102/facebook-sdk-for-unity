@@ -504,6 +504,52 @@ namespace Facebook.Unity
         }
 
         /// <summary>
+        /// 分享单张图片
+        /// </summary>
+        /// <param name="texture2D">想要分享的texutre2D</param>
+        /// <param name="photoURL">想要分享的文件url，可以是本地文件也可以是网络文件；texutre2D参数与photoURL参数只能2选中，若两者都传，优先使用texture2D</param>
+        /// <param name="userGenerated"></param>
+        /// <param name="caption"></param>
+        /// <param name="callback"></param>
+        public static void SharePhoto(
+            Texture2D texture2D = null,
+            Uri photoURL = null,
+            bool userGenerated = false,
+            string caption = "",
+            FacebookDelegate<IShareResult> callback = null)
+        {
+            FacebookImpl.SharePhoto(
+                texture2D,
+                photoURL,
+                userGenerated,
+                caption,
+                callback);
+        }
+
+        /// <summary>
+        /// 分享视频，支持一张预览图片
+        /// </summary>
+        /// <param name="contentTitle"></param>
+        /// <param name="contentDescription"></param>
+        /// <param name="previewPhotoURL"></param>
+        /// <param name="videoURL">视频在本地的url</param>
+        /// <param name="callback"></param>
+        public static void ShareVideo(
+            string contentTitle = "",
+            string contentDescription = "",
+            Uri previewPhotoURL = null,
+            Uri videoURL = null,
+            FacebookDelegate<IShareResult> callback = null)
+        {
+            FacebookImpl.ShareVideo(
+                contentTitle,
+                contentDescription,
+                previewPhotoURL,
+                videoURL,
+                callback);
+        }
+
+        /// <summary>
         /// Legacy feed share. Only use this dialog if you need the legacy parameters otherwiese use
         /// <see cref="FB.ShareLink(System.String, System.String, System.String, System.String, Facebook.FacebookDelegate"/>.
         /// </summary>

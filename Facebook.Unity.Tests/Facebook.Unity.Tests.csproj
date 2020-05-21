@@ -97,6 +97,7 @@
     <Compile Include="Editor\UserAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VersionNumberCheck.cs" />
+    <Compile Include="SharePhoto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
