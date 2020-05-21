@@ -35,8 +35,10 @@ import java.util.Locale;
 public class FBUnityDialogsActivity extends BaseActivity {
     private static String TAG = FBUnityDialogsActivity.class.getName();
     public static final String DIALOG_TYPE = "dialog_type";
-    public static final String SHARE_DIALOG_PARAMS = "share_dialog_params";
-    public static final String FEED_DIALOG_PARAMS = "feed_dialog_params";
+    public static final String SHARE_LINK_DIALOG_PARAMS = "share_link_dialog_params";
+    public static final String SHARE_PHOTO_DIALOG_PARAMS = "share_photo_dialog_params";
+    public static final String SHARE_VIDEO_DIALOG_PARAMS = "share_video_dialog_params";
+    public static final String FEED_SHARE_DIALOG_PARAMS = "feed_share_dialog_params";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +47,27 @@ public class FBUnityDialogsActivity extends BaseActivity {
         Intent intent = getIntent();
         ShareContent shareContent;
         Bundle params;
-        if (intent.hasExtra(SHARE_DIALOG_PARAMS)) {
-            params = intent.getBundleExtra(SHARE_DIALOG_PARAMS);
+        if (intent.hasExtra(SHARE_LINK_DIALOG_PARAMS)) {
+            params = intent.getBundleExtra(SHARE_LINK_DIALOG_PARAMS);
             shareContent = FBDialogUtils.createShareContentBuilder(params).build();
-        } else if (intent.hasExtra(FEED_DIALOG_PARAMS)) {
-            params = intent.getBundleExtra(FEED_DIALOG_PARAMS);
+        } else if (intent.hasExtra(SHARE_PHOTO_DIALOG_PARAMS)) {
+            params = intent.getBundleExtra(SHARE_PHOTO_DIALOG_PARAMS);
+            shareContent = FBDialogUtils.createPhotoContentBuilder(params).build();
+        } else if (intent.hasExtra(SHARE_VIDEO_DIALOG_PARAMS)) {
+            params = intent.getBundleExtra(SHARE_VIDEO_DIALOG_PARAMS);
+            shareContent = FBDialogUtils.createVideoContentBuilder(params).build();
+        } else if (intent.hasExtra(FEED_SHARE_DIALOG_PARAMS)) {
+            params = intent.getBundleExtra(FEED_SHARE_DIALOG_PARAMS);
             shareContent = FBDialogUtils.createFeedContentBuilder(params).build();
         } else {
             Log.e(TAG,
                     String.format(
                             Locale.ROOT,
-                            "Failed to find extra %s or %s",
-                            SHARE_DIALOG_PARAMS,
-                            FEED_DIALOG_PARAMS));
+                            "Failed to find extra %s, %s, %s or %s",
+                            SHARE_LINK_DIALOG_PARAMS,
+                            SHARE_PHOTO_DIALOG_PARAMS,
+                            SHARE_VIDEO_DIALOG_PARAMS,
+                            FEED_SHARE_DIALOG_PARAMS));
             finish();
             return;
         }
