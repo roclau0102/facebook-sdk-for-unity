@@ -25,6 +25,7 @@ namespace Facebook.Unity.Mobile.Android
     using System.Linq;
     using System.Globalization;
     using System.Reflection;
+    using UnityEngine;
 
     internal sealed class AndroidFacebook : MobileFacebook
     {
