@@ -214,6 +214,56 @@ isPublishPermLogin:(BOOL)isPublishPermLogin
                        dialogMode:[self getDialogMode]];
 }
 
+- (void)sharePhotoWithRequestId:(int)requestId
+                  textureBase64:(const char *)textureBase64
+                       photoURL:(const char *)photoURL
+                  userGenerated:(bool)userGenerated
+                        caption:(const char *)caption
+{
+  FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+  photo.userGenerated = userGenerated ? YES : NO;
+  
+  NSString *textureBase64Str = [FBUnityUtility stringFromCString:textureBase64];
+  NSString *photoURLStr = [FBUnityUtility stringFromCString:photoURL];
+
+  if (textureBase64Str)
+  {
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:textureBase64 
+                                                       options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    photo.image = [UIImage imageWithData:data];
+  }
+  else if (photoURLStr)
+  {
+    photo.image = [UIImage imageWithURL:photoURLStr];
+  }
+
+  FBSDKSharePhotoContent *sharePhotoContent = [[FBSDKSharePhotoContent alloc] init];
+  sharePhotoContent.photos = @[photo];
+
+  [self shareContentWithRequestId:requestId shareContent:sharePhotoContent dialogMode:FBSDKShareDialogModeNative];
+}
+
+- (void)shareVideoWithRequestId:(int)requestId
+                   contentTitle:(const char *)contentTitle
+             contentDescription:(const char *)contentDescription
+                previewPhotoURL:(const char *)previewPhotoURL
+                       videoURL:(const char *)videoURL
+{
+  FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+  NSString *previewPhotoURLStr = [FBUnityUtility stringFromCString:previewPhotoURL];
+  if (previewPhotoURLStr)
+  {
+    FBSDKSharePhoto *previewPhoto = [[FBSDKSharePhoto alloc] init];
+    previewPhoto.image = [FBUnityUtility imageWithURL:previewPhotoURLStr];
+  }
+
+  NSString *videoURLStr = [FBUnityUtility stringFromCString:videoURL];
+  if (videoURLStr)
+  {
+    
+  }
+}
+
 - (void)shareFeedWithRequestId:(int)requestId
                           toId:(const char *)toID
                           link:(const char *)link
@@ -252,11 +302,11 @@ isPublishPermLogin:(BOOL)isPublishPermLogin
 }
 
 - (void)shareContentWithRequestId:(int)requestId
-                     shareContent:(FBSDKShareLinkContent *)linkContent
+                     shareContent:(NSObject <FBSDKSharingContent> *)shareContent
                        dialogMode:(FBSDKShareDialogMode)dialogMode
 {
   FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
-  dialog.shareContent = linkContent;
+  dialog.shareContent = shareContent;
   dialog.mode = dialogMode;
   FBUnitySDKDelegate *delegate = [FBUnitySDKDelegate instanceWithRequestID:requestId];
   dialog.delegate = delegate;
@@ -417,6 +467,32 @@ extern "C" {
                                                  contentTitle:contentTitle
                                            contentDescription:contentDescription
                                                      photoURL:photoURL];
+  }
+
+  void IOSFBSharePhoto(int requestId,
+                       const char *textureBase64,
+                       const char *photoURL,
+                       bool userGenerated,
+                       const char *caption)
+  {
+      [[FBUnityInterface sharedInstance] sharePhotoWithRequestId:requestId
+                                                   textureBase64:textureBase64
+                                                        photoURL:photoURL
+                                                   userGenerated:userGenerated
+                                                         caption:caption];
+  }
+
+  void IOSFBShareVideo(int requestId,
+                       const char *contentTitle,
+                       const char *contentDescription,
+                       const char *previewPhotoURL,
+                       const char *videoURL)
+  {
+      [[FBUnityInterface sharedInstance] shareVideoWithRequestId:requestId
+                                                    contentTitle:contentTitle
+                                              contentDescription:contentDescription
+                                                 previewPhotoURL:previewPhotoURL
+                                                        videoURL:videoURL];
   }
 
   void IOSFBFeedShare(int requestId,
