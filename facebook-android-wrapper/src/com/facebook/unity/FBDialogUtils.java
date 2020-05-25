@@ -22,8 +22,14 @@ package com.facebook.unity;
 
 import com.facebook.share.internal.ShareFeedContent;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.model.ShareVideo;
+import com.facebook.share.model.ShareVideoContent;
 import com.facebook.share.widget.ShareDialog;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -48,6 +54,58 @@ class FBDialogUtils {
         }
 
         return builder;
+    }
+
+    public static SharePhotoContent.Builder createPhotoContentBuilder(Bundle params) {
+        SharePhoto.Builder photoBuilder = new SharePhoto.Builder();
+
+        if (params.containsKey("bitmap_path")) {
+            Bitmap bitmap = BitmapFactory.decodeFile(params.getString("bitmap_path"));
+            photoBuilder.setBitmap(bitmap);
+        }
+
+        if (params.containsKey("photo_url")) {
+            photoBuilder.setImageUrl(Uri.parse(params.getString("photo_url")));
+        }
+
+        if (params.containsKey("user_generated")) {
+            photoBuilder.setUserGenerated(Boolean.parseBoolean(params.getString("user_generated")));
+        }
+
+        if (params.containsKey("caption")) {
+            photoBuilder.setCaption(params.getString("caption"));
+        }
+
+        SharePhotoContent.Builder contentBuilder = new SharePhotoContent.Builder();
+        contentBuilder.addPhoto(photoBuilder.build());
+
+        return contentBuilder;
+    }
+
+    public static ShareVideoContent.Builder createVideoContentBuilder(Bundle params) {
+        ShareVideoContent.Builder videoContentBuilder = new ShareVideoContent.Builder();
+
+        if (params.containsKey("content_title")) {
+            videoContentBuilder.setContentTitle(params.getString("content_title"));
+        }
+
+        if (params.containsKey("content_description")) {
+            videoContentBuilder.setContentDescription(params.getString("content_description"));
+        }
+
+        if (params.containsKey("preview_photo_url")) {
+            SharePhoto.Builder previewPhotoBuilder = new SharePhoto.Builder();
+            previewPhotoBuilder.setImageUrl(Uri.parse(params.getString("preview_photo_url")));
+            videoContentBuilder.setPreviewPhoto(previewPhotoBuilder.build());
+        }
+
+        if (params.containsKey("video_url")) {
+            ShareVideo.Builder videoBuilder = new ShareVideo.Builder();
+            videoBuilder.setLocalUrl(Uri.parse(params.getString("video_url")));
+            videoContentBuilder.setVideo(videoBuilder.build());
+        }
+
+        return videoContentBuilder;
     }
 
     public static ShareFeedContent.Builder createFeedContentBuilder(Bundle params) {

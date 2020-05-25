@@ -32,4 +32,6 @@ extern const char* const FB_OBJECT_NAME;
 + (NSString *)stringFromCString:(const char *)string;
 + (NSDictionary *)appLinkDataFromUrl:(NSURL *)url;
 + (NSDictionary *)getUserDataFromAccessToken:(FBSDKAccessToken *)token;
++ (UIImage *)imageWithURL:(NSString *)photoURL;
++ (void)saveVideo:(NSString *)videoURL completionHandler:(void(^)(PHAsset *))completionHandler;
 @end

@@ -191,7 +191,29 @@ public class FB {
         final Bundle params = unity_params.getStringParams();
         Intent intent = new Intent(getUnityActivity(), FBUnityDialogsActivity.class);
         intent.putExtra(FBUnityDialogsActivity.DIALOG_TYPE, ShareDialogMode);
-        intent.putExtra(FBUnityDialogsActivity.SHARE_DIALOG_PARAMS, params);
+        intent.putExtra(FBUnityDialogsActivity.SHARE_LINK_DIALOG_PARAMS, params);
+        getUnityActivity().startActivity(intent);
+    }
+
+    @UnityCallable
+    public static void SharePhoto(String params_str) {
+        Log.v(TAG, "SharePhoto(" + params_str + ")");
+        final UnityParams unity_params = UnityParams.parse(params_str);
+        final Bundle params = unity_params.getStringParams();
+        Intent intent = new Intent(getUnityActivity(), FBUnityDialogsActivity.class);
+        intent.putExtra(FBUnityDialogsActivity.DIALOG_TYPE, ShareDialogMode);
+        intent.putExtra(FBUnityDialogsActivity.SHARE_PHOTO_DIALOG_PARAMS, params);
+        getUnityActivity().startActivity(intent);
+    }
+
+    @UnityCallable
+    public static void ShareVideo(String params_str) {
+        Log.v(TAG, "ShareVideo(" + params_str + ")");
+        final UnityParams unity_params = UnityParams.parse(params_str);
+        final Bundle params = unity_params.getStringParams();
+        Intent intent = new Intent(getUnityActivity(), FBUnityDialogsActivity.class);
+        intent.putExtra(FBUnityDialogsActivity.DIALOG_TYPE, ShareDialogMode);
+        intent.putExtra(FBUnityDialogsActivity.SHARE_VIDEO_DIALOG_PARAMS, params);
         getUnityActivity().startActivity(intent);
     }
 
@@ -202,7 +224,7 @@ public class FB {
         final Bundle params = unityParams.getStringParams();
         Intent intent = new Intent(getUnityActivity(), FBUnityDialogsActivity.class);
         intent.putExtra(FBUnityDialogsActivity.DIALOG_TYPE, ShareDialog.Mode.FEED);
-        intent.putExtra(FBUnityDialogsActivity.FEED_DIALOG_PARAMS, params);
+        intent.putExtra(FBUnityDialogsActivity.FEED_SHARE_DIALOG_PARAMS, params);
         getUnityActivity().startActivity(intent);
     }
 

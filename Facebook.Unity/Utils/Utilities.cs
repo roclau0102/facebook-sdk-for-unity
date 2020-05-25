@@ -25,6 +25,8 @@ namespace Facebook.Unity
     using System.Globalization;
     using System.Linq;
     using System.Text;
+    using System.IO;
+    using UnityEngine;
 
     internal static class Utilities
     {
@@ -188,6 +190,22 @@ namespace Facebook.Unity
             return sb.ToString();
         }
 
+        public static string SaveTexture2DtoPNG(Texture2D texture2D, string saveName)
+        {
+            var tempDir = Path.Combine(Application.persistentDataPath, "TempShareImage");
+            if (!Directory.Exists(tempDir))
+            {
+                Directory.CreateDirectory(tempDir);
+            }
+            var savePath = Path.Combine(tempDir, saveName.EndsWith(".png", StringComparison.Ordinal) ? saveName : saveName + ".png");
+            if (File.Exists(savePath))
+            {
+                File.Delete(savePath);
+            }
+            File.WriteAllBytes(savePath, texture2D.EncodeToPNG());
+            return savePath;
+        }
+
         private static DateTime ParseExpirationDateFromResult(IDictionary<string, object> resultDictionary)
         {
             DateTime expiration;
@@ -259,5 +277,7 @@ namespace Facebook.Unity
         {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(timestamp);
         }
+
+
     }
 }

@@ -10,6 +10,9 @@ allprojects {
 
 buildscript {
     repositories {
+        maven {
+            url "http://mvn-apt.2980.com/repository/maven-group"
+        }
         mavenCentral()
         google()
         jcenter()
@@ -31,6 +34,9 @@ repositories {
             dirs localRepo
         }
     } else {
+        maven {
+            url "http://mvn-apt.2980.com/repository/maven-group"
+        }
       mavenCentral()
       google()
       jcenter()

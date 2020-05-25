@@ -111,6 +111,20 @@ namespace Facebook.Unity
             Uri photoURL,
             FacebookDelegate<IShareResult> callback);
 
+        public abstract void SharePhoto(
+            Texture2D texture2D,
+            Uri photoURL,
+            bool userGenerated,
+            string caption,
+            FacebookDelegate<IShareResult> callback);
+
+        public abstract void ShareVideo(
+            string contentTitle,
+            string contentDescription,
+            Uri previewPhotoURL,
+            Uri videoURL,
+            FacebookDelegate<IShareResult> callback);
+
         public abstract void FeedShare(
             string toId,
             Uri link,

@@ -87,6 +87,36 @@ namespace Facebook.Unity.IOS
                 photoURL);
         }
 
+        public void SharePhoto(
+            int requestId,
+            string texture,
+            string photoURL,
+            bool userGenerated,
+            string caption)
+        {
+            IOSWrapper.IOSFBSharePhoto(
+                requestId,
+                texture,
+                photoURL,
+                userGenerated,
+                caption);
+        }
+
+        public void ShareVideo(
+            int requestId,
+            string contentTitle,
+            string contentDescription,
+            string previewPhotoURL,
+            string videoURL)
+        {
+            IOSWrapper.IOSFBShareVideo(
+                requestId,
+                contentTitle,
+                contentDescription,
+                previewPhotoURL,
+                videoURL);
+        }
+
         public void FeedShare(
             int requestId,
             string toId,
@@ -290,6 +320,22 @@ namespace Facebook.Unity.IOS
             string contentTitle,
             string contentDescription,
             string photoURL);
+
+        [DllImport("__Internal")]
+        private static extern void IOSFBSharePhoto(
+            int requestId,
+            string texture,
+            string photoURL,
+            bool userGenerated,
+            string caption);
+
+        [DllImport("__Internal")]
+        private static extern void IOSFBShareVideo(
+            int requestId,
+            string contentTitle,
+            string contentDescription,
+            string previewPhotoURL,
+            string videoURL);
 
         [DllImport("__Internal")]
         private static extern void IOSFBFeedShare(
