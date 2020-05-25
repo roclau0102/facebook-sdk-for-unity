@@ -16,7 +16,7 @@
                 Texture2D.blackTexture,
                 callback:(r) => {
                     result = r;
-                };
+                });
 
             Assert.IsNotNull(result);
             FacebookLogger.Log(result.RawResult);
