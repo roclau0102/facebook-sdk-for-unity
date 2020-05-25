@@ -26,7 +26,7 @@ export SCRIPTS_DIR="$PROJECT_ROOT/scripts"
 
 CORE_ROOT=$PROJECT_ROOT/Facebook.Unity
 
-UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
+UNITY_PATH="/Applications/Unity2017.4.32f1/Unity.app/Contents/MacOS/Unity"
 UNITY_PACKAGE_ROOT=$PROJECT_ROOT/UnitySDK
 UNITY_PACKAGE_PLUGIN=$UNITY_PACKAGE_ROOT/Assets/FacebookSDK/Plugins/
 export UNITY_ANDROID_PLUGIN=$UNITY_PACKAGE_PLUGIN/Android/
