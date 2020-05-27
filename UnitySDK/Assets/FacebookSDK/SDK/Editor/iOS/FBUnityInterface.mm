@@ -228,7 +228,7 @@ isPublishPermLogin:(BOOL)isPublishPermLogin
 
   if (textureBase64Str)
   {
-    NSData *data = [[NSData alloc] initWithBase64EncodedString:textureBase64 
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:textureBase64Str 
                                                        options:NSDataBase64DecodingIgnoreUnknownCharacters];
     photo.image = [UIImage imageWithData:data];
   }
@@ -260,7 +260,12 @@ isPublishPermLogin:(BOOL)isPublishPermLogin
   NSString *videoURLStr = [FBUnityUtility stringFromCString:videoURL];
   if (videoURLStr)
   {
-    
+    [FBUnityUtility saveVideo:videoURLStr completionHandler:^(PHAsset *asset) {
+      video.videoAsset = asset;
+      FBSDKShareVideoContent *shareContent = [[FBSDKShareVideoContent alloc] init];
+      shareContent.video = video;
+      [self shareContentWithRequestId:requestId shareContent:shareContent dialogMode:FBSDKShareDialogModeNative];
+    }];
   }
 }
 
